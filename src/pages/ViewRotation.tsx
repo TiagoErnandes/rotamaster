@@ -1,4 +1,4 @@
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { decodeRotation, buildShareUrl, copyToClipboard } from '../utils/share';
 import { SkillIcon } from '../components/SkillIcon/SkillIcon';
@@ -16,6 +16,7 @@ export function ViewRotation() {
     return decodeRotation(encoded);
   }, [encoded]);
 
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(() => (rotation ? hasLiked(rotation) : false));
   const [likes, setLikes] = useState(rotation?.likes ?? 0);
   const [saved, setSaved] = useState(false);
@@ -63,6 +64,10 @@ export function ViewRotation() {
     setIsExporting(true);
     await exportAsImage('view-rotation-area', `rotacao-${rotation.class.toLowerCase()}.png`);
     setIsExporting(false);
+  };
+
+  const handleEdit = () => {
+    navigate('/', { state: { editRotation: rotation } });
   };
 
   return (
@@ -148,14 +153,30 @@ export function ViewRotation() {
         </div>
       </div>
 
+      {/* Edit callout */}
+      <div className="bg-game-900 border border-blue-500/20 rounded-xl px-4 py-3 flex items-center justify-between gap-4">
+        <div>
+          <p className="text-sm font-semibold text-gray-200">Quer sugerir uma mudança?</p>
+          <p className="text-xs text-gray-500 mt-0.5">
+            Edite a rotação, salve e envie o novo link de volta para quem criou.
+          </p>
+        </div>
+        <button
+          onClick={handleEdit}
+          className="btn-primary flex items-center gap-2 flex-shrink-0"
+        >
+          ✏️ Editar esta rotação
+        </button>
+      </div>
+
       {/* Actions */}
       <div className="flex flex-wrap gap-3">
         {!saved ? (
-          <button onClick={handleSaveToLib} className="btn-primary flex items-center gap-2">
-            💾 Salvar na minha biblioteca
+          <button onClick={handleSaveToLib} className="btn-secondary flex items-center gap-2">
+            💾 Salvar na biblioteca
           </button>
         ) : (
-          <span className="btn-primary bg-green-800 border-green-600 cursor-default">✓ Salvo!</span>
+          <span className="btn-secondary border-green-600/40 text-green-400 cursor-default">✓ Salvo!</span>
         )}
         <button onClick={handleCopy} className="btn-secondary flex items-center gap-2">
           {copied ? '✓ Copiado!' : '🔗 Copiar Link'}
@@ -163,9 +184,6 @@ export function ViewRotation() {
         <button onClick={handleExport} disabled={isExporting} className="btn-secondary flex items-center gap-2">
           {isExporting ? '⏳ Exportando...' : '🖼️ Exportar Imagem'}
         </button>
-        <Link to="/" className="btn-secondary flex items-center gap-2">
-          ⚔️ Criar minha rotação
-        </Link>
       </div>
     </div>
   );

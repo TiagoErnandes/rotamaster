@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   DndContext,
   DragOverlay,
@@ -43,13 +44,30 @@ function DropZone({ children, hasItems }: { children: React.ReactNode; hasItems:
 }
 
 export function RotationBuilder() {
-  const [selectedClass, setSelectedClass] = useState<GameClass>('Gunner');
-  const [entries, setEntries] = useState<RotationEntry[]>([]);
-  const [breaks, setBreaks] = useState<Set<string>>(new Set());
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [authorName, setAuthorName] = useState('');
-  const [mode, setMode] = useState<GameMode>('PvE');
+  const location = useLocation();
+  const editRotation = (location.state as { editRotation?: Rotation } | null)?.editRotation;
+
+  const [selectedClass, setSelectedClass] = useState<GameClass>(editRotation?.class ?? 'Gunner');
+  const [entries, setEntries] = useState<RotationEntry[]>(editRotation?.entries ?? []);
+  const [breaks, setBreaks] = useState<Set<string>>(() => {
+    if (!editRotation?.breakAfterIndices?.length) return new Set();
+    return new Set(
+      editRotation.breakAfterIndices
+        .filter(i => i < (editRotation.entries?.length ?? 0))
+        .map(i => editRotation.entries[i].uid)
+    );
+  });
+  const [title, setTitle] = useState(editRotation?.title ?? '');
+  const [description, setDescription] = useState(editRotation?.description ?? '');
+  const [authorName, setAuthorName] = useState(editRotation?.authorName ?? '');
+  const [mode, setMode] = useState<GameMode>(editRotation?.mode ?? 'PvE');
+
+  useEffect(() => {
+    if (editRotation) {
+      // Clear the navigation state so a refresh doesn't re-load the edit
+      window.history.replaceState({}, '');
+    }
+  }, []);
   const [showShare, setShowShare] = useState(false);
   const [savedRotation, setSavedRotation] = useState<Rotation | null>(null);
   const [activeSkill, setActiveSkill] = useState<Skill | null>(null);
