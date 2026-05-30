@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Shining Crescent">
+  <defs>
+    <radialGradient id="bgGlow" cx="48%" cy="42%" r="72%">
+      <stop offset="0%" stop-color="#173d62" stop-opacity="0.95" />
+      <stop offset="45%" stop-color="#0c1f35" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#050b15" stop-opacity="1" />
+    </radialGradient>
+    <radialGradient id="sparkWash" cx="22%" cy="68%" r="42%">
+      <stop offset="0%" stop-color="#7fe7ff" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#3ec4ff" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#3ec4ff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="moonFill" x1="18%" y1="16%" x2="82%" y2="84%">
+      <stop offset="0%" stop-color="#f9ffff" />
+      <stop offset="34%" stop-color="#cbf4ff" />
+      <stop offset="68%" stop-color="#7fdcff" />
+      <stop offset="100%" stop-color="#2caeff" />
+    </linearGradient>
+    <linearGradient id="moonEdge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="55%" stop-color="#9aeaff" />
+      <stop offset="100%" stop-color="#39bfff" />
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.2" />
+    </filter>
+    <filter id="sparkGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.55" />
+    </filter>
+    <clipPath id="crescentClip">
+      <path d="M44.2 11.6c-8.9.9-16 8.5-16 17.6 0 10.1 8.2 18.3 18.3 18.3 4.1 0 7.9-1.4 11-3.7-2.4 1.2-5.1 1.9-7.9 1.9-9 0-16.3-7.3-16.3-16.3 0-7.8 5.5-14.3 12.9-15.8z" />
+    </clipPath>
+  </defs>
+
+  <rect width="64" height="64" rx="8" fill="url(#bgGlow)" />
+  <rect width="64" height="64" rx="8" fill="url(#sparkWash)" opacity="0.75" />
+
+  <g opacity="0.85" filter="url(#softGlow)">
+    <circle cx="14" cy="50" r="8" fill="#56d8ff" opacity="0.4" />
+    <circle cx="18" cy="46" r="5" fill="#86ebff" opacity="0.45" />
+  </g>
+
+  <g filter="url(#sparkGlow)">
+    <path d="M8 44c4 1 7 4 9 8" fill="none" stroke="#d7fbff" stroke-width="1" stroke-linecap="round" opacity="0.75" />
+    <path d="M11 38c5 1.5 9 5 12 10" fill="none" stroke="#8ee8ff" stroke-width="1.1" stroke-linecap="round" opacity="0.85" />
+    <circle cx="10" cy="46" r="1" fill="#e8ffff" />
+    <circle cx="14" cy="52" r="0.9" fill="#b9f4ff" />
+    <circle cx="17" cy="48" r="0.8" fill="#7ddfff" />
+    <circle cx="20" cy="55" r="0.75" fill="#e8ffff" />
+    <circle cx="23" cy="50" r="0.7" fill="#83e7ff" />
+    <circle cx="17" cy="42" r="0.7" fill="#d7fbff" />
+    <circle cx="49" cy="20" r="0.75" fill="#d7fbff" />
+    <circle cx="51" cy="25" r="0.7" fill="#8ee8ff" />
+  </g>
+
+  <g transform="translate(1 1)">
+    <circle cx="34" cy="28" r="15" fill="url(#moonEdge)" opacity="0.23" filter="url(#glow)" />
+    <path d="M43.5 11.8c-1.6 0-3.2.2-4.7.7 5.9 2.5 10 8.4 10 15.2 0 7.9-5.5 14.6-12.9 16.3 1.6.4 3.2.6 4.9.6 10.1 0 18.3-8.2 18.3-18.3S53.6 11.8 43.5 11.8z" fill="url(#moonFill)" />
+    <path d="M43.5 11.8c-8.9.9-16 8.5-16 17.6 0 10.1 8.2 18.3 18.3 18.3 4.1 0 7.9-1.4 11-3.7-2.4 1.2-5.1 1.9-7.9 1.9-9 0-16.3-7.3-16.3-16.3 0-7.8 5.5-14.3 12.9-15.8z" fill="#062033" clip-path="url(#crescentClip)" />
+    <path d="M44 12.3c-8.4 1.4-14.8 8.7-14.8 17.4 0 8.6 5.9 15.8 13.9 17.8-7.1-2.2-12.2-8.8-12.2-16.5 0-8.4 5.9-15.6 13.1-17.7z" fill="#ffffff" opacity="0.14" />
+    <path d="M41.9 13.7c-6.9 2-12 8.3-12 15.7 0 6.8 4 12.8 9.8 15.3-4.6-2.9-7.6-8-7.6-13.8 0-7 4.1-13 9.8-17.2z" fill="#ffffff" opacity="0.08" />
+  </g>
+</svg>
